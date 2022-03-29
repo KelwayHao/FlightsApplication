@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FlightsApplication</string>
+    <string name="confirm_button">Confirm</string>
+    <string name="button_history_flights">History flights</string>
 </resources>
