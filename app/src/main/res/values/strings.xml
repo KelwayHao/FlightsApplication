@@ -2,4 +2,6 @@
     <string name="app_name">FlightsApplication</string>
     <string name="confirm_button">Confirm</string>
     <string name="button_history_flights">History flights</string>
+    <string name="show_snack_validation">Enter all fields</string>
+    <string name="title_history_page">Your history flight</string>
 </resources>

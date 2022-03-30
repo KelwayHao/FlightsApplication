@@ -35,6 +35,7 @@
                 android:id="@+id/inputFlightDeparture"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imageFlightTakeoff"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -52,6 +53,7 @@
                 android:id="@+id/inputFlightDestination"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imageFlightLand"
                 app:layout_constraintTop_toBottomOf="@id/inputFlightDeparture" />
@@ -92,6 +94,7 @@
                 android:id="@+id/inputDepartDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
                 app:layout_constraintEnd_toStartOf="@+id/inputReturnDate"
                 app:layout_constraintStart_toEndOf="@id/imageCalendar"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -100,6 +103,7 @@
                 android:id="@+id/inputReturnDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/inputDepartDate"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -139,6 +143,7 @@
                 android:id="@+id/inputNumberPassportPassenger"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imagePassenger"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -147,11 +152,12 @@
                 android:id="@+id/inputNamePassenger"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imagePassenger"
                 app:layout_constraintTop_toBottomOf="@id/inputNumberPassportPassenger" />
 
-            <ViewSwitcher
+            <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/typePassenger"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

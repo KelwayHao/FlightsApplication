@@ -8,9 +8,9 @@ class FlightTicketRepositoryImpl(private val repository: FlightTicketRepository)
         return repository.getSavedFlightTicket()
     }
 
-    override suspend fun deleteFlightTickets() {
+    /*override suspend fun deleteFlightTickets() {
         TODO("Not yet implemented")
-    }
+    }*/
 
     override suspend fun createFlightTickets(
         departure: String,
