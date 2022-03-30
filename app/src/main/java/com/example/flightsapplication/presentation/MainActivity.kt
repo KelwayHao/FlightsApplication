@@ -1,8 +1,8 @@
-package com.example.flightsapplication
+package com.example.flightsapplication.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.FragmentManager
+import com.example.flightsapplication.R
 import com.example.flightsapplication.presentation.fragment.HistoryFragment
 import com.example.flightsapplication.presentation.fragment.RegistrationFragment
 import com.example.flightsapplication.utils.openFragment
@@ -20,8 +20,6 @@ class MainActivity : AppCompatActivity() {
         initView()
         checkHistory()
     }
-
-
 
     private fun initView() {
         openFragment(R.id.frameFragment, RegistrationFragment.newInstance(), RegistrationFragment.TAG)
