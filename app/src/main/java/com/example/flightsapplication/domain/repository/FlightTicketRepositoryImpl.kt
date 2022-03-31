@@ -3,7 +3,8 @@ package com.example.flightsapplication.domain.repository
 import com.example.flightsapplication.domain.models.FlightTicket
 import java.util.*
 
-class FlightTicketRepositoryImpl(private val repository: FlightTicketRepository): FlightTicketInteractor {
+class FlightTicketRepositoryImpl(private val repository: FlightTicketRepository) :
+    FlightTicketInteractor {
     override suspend fun getFlightTickets(): List<FlightTicket> {
         return repository.getSavedFlightTicket()
     }

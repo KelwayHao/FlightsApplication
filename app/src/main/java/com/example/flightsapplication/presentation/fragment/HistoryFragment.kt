@@ -9,9 +9,9 @@ import com.example.flightsapplication.presentation.viewmodel.FlightViewModel
 import kotlinx.android.synthetic.main.fragment_flight_history.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class HistoryFragment: Fragment(R.layout.fragment_flight_history){
+class HistoryFragment : Fragment(R.layout.fragment_flight_history) {
 
-    private val viewModel:FlightViewModel by sharedViewModel()
+    private val viewModel: FlightViewModel by sharedViewModel()
     private val adapter by lazy { Adapter() }
 
     companion object {

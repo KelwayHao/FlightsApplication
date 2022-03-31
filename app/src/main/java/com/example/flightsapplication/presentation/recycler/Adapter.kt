@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flightsapplication.domain.models.FlightTicket
 
-class Adapter: RecyclerView.Adapter<FlightViewHolder>() {
+class Adapter : RecyclerView.Adapter<FlightViewHolder>() {
 
     private var items: List<FlightTicket> = emptyList()
 
@@ -20,7 +20,7 @@ class Adapter: RecyclerView.Adapter<FlightViewHolder>() {
     override fun getItemCount() = items.size
 
     @SuppressLint("NotifyDataSetChanged")
-    fun submitItem(listItem: List<FlightTicket>){
+    fun submitItem(listItem: List<FlightTicket>) {
         items = listItem
         notifyDataSetChanged()
     }

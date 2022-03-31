@@ -4,4 +4,12 @@
     <string name="button_history_flights">History flights</string>
     <string name="show_snack_validation">Enter all fields</string>
     <string name="title_history_page">Your history flight</string>
+    <string name="passenger_switch">Passenger: %s</string>
+    <string name="departure">Departure</string>
+    <string name="destination">Destination</string>
+    <string name="number_passport">Number passport</string>
+    <string name="name_passenger">Name passenger</string>
+    <string name="depart_date">Depart Date and Time</string>
+    <string name="return_date">Return Date and Time</string>
+    <string name="message_flight_success">Flight successfully saved</string>
 </resources>
