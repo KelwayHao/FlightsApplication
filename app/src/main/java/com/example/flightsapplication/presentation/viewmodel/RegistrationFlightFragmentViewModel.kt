@@ -9,12 +9,14 @@ import com.example.flightsapplication.domain.repository.FlightTicketInteractor
 import kotlinx.coroutines.launch
 import java.util.*
 
-class FlightViewModel(private val interactor: FlightTicketInteractor) : ViewModel() {
+class RegistrationFlightFragmentViewModel(private val interactor: FlightTicketInteractor) :
+    ViewModel() {
 
-    private val _flightTicket = MutableLiveData<List<FlightTicket>>()
-    val flightTicket: LiveData<List<FlightTicket>> get() = _flightTicket
+    private val _submitFlightTicket = MutableLiveData<List<FlightTicket>>()
+    val submitFlightTicket: LiveData<List<FlightTicket>> get() = _submitFlightTicket
 
     fun createFlightTicket(
+        id: Long,
         departure: String,
         destination: String,
         departDate: Date,
@@ -25,6 +27,7 @@ class FlightViewModel(private val interactor: FlightTicketInteractor) : ViewMode
     ) {
         viewModelScope.launch {
             interactor.createFlightTickets(
+                id,
                 departure,
                 destination,
                 departDate,
@@ -33,12 +36,6 @@ class FlightViewModel(private val interactor: FlightTicketInteractor) : ViewMode
                 namePassenger,
                 typePassenger
             )
-        }
-    }
-
-    fun getFlightTickets() {
-        viewModelScope.launch {
-            _flightTicket.postValue(interactor.getFlightTickets())
         }
     }
 }

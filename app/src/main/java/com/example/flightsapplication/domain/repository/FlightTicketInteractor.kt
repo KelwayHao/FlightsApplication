@@ -6,9 +6,10 @@ import java.util.*
 interface FlightTicketInteractor {
     suspend fun getFlightTickets(): List<FlightTicket>
 
-    /*suspend fun deleteFlightTickets()*/
+    suspend fun deleteFlightTickets(flightTicket: FlightTicket)
 
     suspend fun createFlightTickets(
+        id: Long,
         departure: String,
         destination: String,
         departDate: Date,

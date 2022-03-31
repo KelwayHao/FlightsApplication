@@ -4,31 +4,47 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.flightsapplication.R
+import com.example.flightsapplication.domain.models.FlightTicket
+import com.example.flightsapplication.presentation.DeleteOnClickListener
 import com.example.flightsapplication.presentation.recycler.Adapter
-import com.example.flightsapplication.presentation.viewmodel.FlightViewModel
+import com.example.flightsapplication.presentation.viewmodel.HistoryFragmentViewModel
+import com.example.flightsapplication.utils.dialog
+import com.example.flightsapplication.utils.showSnack
 import kotlinx.android.synthetic.main.fragment_flight_history.*
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HistoryFragment : Fragment(R.layout.fragment_flight_history) {
 
-    private val viewModel: FlightViewModel by sharedViewModel()
-    private val adapter by lazy { Adapter() }
+    private val viewTicketModel: HistoryFragmentViewModel by viewModel<HistoryFragmentViewModel>()
+    private val adapter by lazy { Adapter(deleteClickListener) }
 
     companion object {
         const val TAG = "History fragment"
         fun newInstance() = HistoryFragment()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        viewModel.getFlightTickets()
-
-        recyclerFlights.adapter = adapter
-
-        viewModel.flightTicket.observe(viewLifecycleOwner) { listFlightTicket ->
-            adapter.submitItem(listFlightTicket)
+    private val deleteClickListener by lazy {
+        object : DeleteOnClickListener {
+            override fun deleteTicket(flightTicket: FlightTicket) {
+                dialog("Are you sure? This action cannot be undone!!", requireActivity()){
+                    viewTicketModel.deleteFlightTicket(flightTicket)
+                    showSnack("111", requireView())
+                }
+            }
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewTicketModel.getFlightTickets()
+        initObserver()
+    }
+
+    private fun initObserver() {
+        recyclerFlights.adapter = adapter
+
+        viewTicketModel.flightTicket.observe(viewLifecycleOwner) { listTicket ->
+            adapter.submitItem(listTicket)
+        }
+    }
 }

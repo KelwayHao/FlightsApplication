@@ -23,7 +23,10 @@ class FlightTicketEntityRepositoryImpl(private val flightTicketsDao: FlightTicke
         }
     }
 
-    /*override suspend fun deleteFlightTicketOnDatabase() {
-        TODO("Not yet implemented")
-    }*/
+    override suspend fun deleteFlightTicketOnDatabase(ticket: FlightTicket) {
+        return withContext(Dispatchers.IO) {
+            flightTicketsDao.deleteFlightTicket(ticket.toFlightTicketEntity())
+        }
+    }
+
 }

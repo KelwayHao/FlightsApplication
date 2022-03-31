@@ -8,5 +8,5 @@ interface FlightTicketRepository {
 
     suspend fun saveFlightTicket(ticket: FlightTicket)
 
-    /*suspend fun deleteFlightTicketOnDatabase()*/
+    suspend fun deleteFlightTicketOnDatabase(ticket: FlightTicket)
 }

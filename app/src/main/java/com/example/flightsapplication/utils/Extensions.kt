@@ -1,13 +1,15 @@
 package com.example.flightsapplication.utils
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.view.View
 import android.widget.TextView
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import com.example.flightsapplication.R
 import com.example.flightsapplication.data.storage.entity.FlightTicketEntity
 import com.example.flightsapplication.domain.models.FlightTicket
 import com.google.android.material.snackbar.Snackbar
@@ -31,7 +33,8 @@ fun FlightTicketEntity.toFlightTicket() =
         returnDate = returnDate.fromStringToDate(),
         numberPassportPassenger = numberPassportPassenger,
         namePassenger = namePassenger,
-        typePassenger = typePassenger.toTypePassenger()
+        typePassenger = typePassenger.toTypePassenger(),
+        id = id
     )
 
 
@@ -43,7 +46,8 @@ fun FlightTicket.toFlightTicketEntity() =
         returnDate = returnDate.fromDateToString(),
         numberPassportPassenger = numberPassportPassenger,
         namePassenger = namePassenger,
-        typePassenger = typePassenger.type
+        typePassenger = typePassenger.type,
+        id = id
     )
 
 
@@ -99,7 +103,8 @@ fun Fragment.timePickTime(textView: TextView) {
     val timePickerDialog = TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
         calendar.set(Calendar.MINUTE, minute)
-        textView.text = "${textView.text} ${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)}"
+        textView.text =
+            "${textView.text} ${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)}"
     }
 
     TimePickerDialog(
@@ -111,4 +116,18 @@ fun Fragment.timePickTime(textView: TextView) {
     ).show()
 }
 
+fun Fragment.dialog(message: String, context: Context, deleteFlight: () -> Unit) {
+    val builder = AlertDialog.Builder(context)
+    builder.setTitle(R.string.warning)
+        .setMessage(message)
+        .setCancelable(true)
+        .setPositiveButton("Yes") { dialogMessage, _ ->
+            deleteFlight()
+            dialogMessage.cancel()
+        }
+        .setNegativeButton("No") { dialogMessage, _ ->
+            dialogMessage.cancel()
+        }
+    builder.create()
+}
 

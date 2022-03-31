@@ -9,11 +9,12 @@ class FlightTicketRepositoryImpl(private val repository: FlightTicketRepository)
         return repository.getSavedFlightTicket()
     }
 
-    /*override suspend fun deleteFlightTickets() {
-        TODO("Not yet implemented")
-    }*/
+    override suspend fun deleteFlightTickets(flightTicket: FlightTicket) {
+        repository.deleteFlightTicketOnDatabase(flightTicket)
+    }
 
     override suspend fun createFlightTickets(
+        id:Long,
         departure: String,
         destination: String,
         departDate: Date,
@@ -24,6 +25,7 @@ class FlightTicketRepositoryImpl(private val repository: FlightTicketRepository)
     ) {
         repository.saveFlightTicket(
             FlightTicket(
+                id,
                 departure,
                 destination,
                 departDate,
