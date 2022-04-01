@@ -13,4 +13,8 @@
     <string name="return_date">Return Date and Time</string>
     <string name="message_flight_success">Flight successfully saved</string>
     <string name="warning">Warning!</string>
+    <string name="remote_success">Remote Successfully</string>
+    <string name="title_dialog_message">Are you sure? This action cannot be undone!!</string>
+    <string name="arrival_text">Arrival</string>
+    <string name="depart_text">Depart</string>
 </resources>

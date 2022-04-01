@@ -14,53 +14,127 @@
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="true">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:padding="18dp">
 
             <TextView
-                android:id="@+id/historyDeparture"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/historyDestination"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/historyDateDepart"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/historyDateReturn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:id="@+id/historyNamePassenger"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@id/historyNumberPassportPassenger"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/historyNumberPassportPassenger"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/historyNamePassenger"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/historyNamePassenger"
+                app:layout_constraintEnd_toStartOf="@id/historyTypePassenger"/>
 
             <TextView
                 android:id="@+id/historyTypePassenger"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@id/historyNumberPassportPassenger"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/descriptionDeparture"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/departure"
+                android:textSize="10sp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toStartOf="@id/descriptionDestination"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/historyNamePassenger" />
+
+            <TextView
+                android:id="@+id/descriptionDestination"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/destination"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/descriptionDeparture"
+                app:layout_constraintTop_toTopOf="@id/descriptionDeparture" />
+
+            <TextView
+                android:id="@+id/historyDeparture"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@id/historyDestination"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/descriptionDeparture" />
+
+            <TextView
+                android:id="@+id/historyDestination"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/historyDeparture"
+                app:layout_constraintTop_toBottomOf="@id/descriptionDestination" />
+
+            <TextView
+                android:id="@+id/descriptionDataDepart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/depart_text"
+                android:textSize="10sp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toStartOf="@id/descriptionDataArrival"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/historyDeparture" />
+
+            <TextView
+                android:id="@+id/descriptionDataArrival"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/arrival_text"
+                android:textSize="10sp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/descriptionDataDepart"
+                app:layout_constraintTop_toBottomOf="@id/historyDestination" />
+
+            <TextView
+                android:id="@+id/historyDateDepart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@id/historyDateArrival"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/descriptionDataDepart" />
+
+            <TextView
+                android:id="@+id/historyDateArrival"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/historyDeparture"
+                app:layout_constraintTop_toBottomOf="@id/descriptionDataArrival" />
 
             <ImageView
                 android:id="@+id/imageDeleteObject"
-                android:src="@drawable/ic_baseline_delete_24"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_delete_24"
+                app:layout_constraintTop_toBottomOf="@id/historyDateArrival"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 

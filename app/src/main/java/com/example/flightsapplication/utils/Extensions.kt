@@ -128,6 +128,6 @@ fun Fragment.dialog(message: String, context: Context, deleteFlight: () -> Unit)
         .setNegativeButton("No") { dialogMessage, _ ->
             dialogMessage.cancel()
         }
-    builder.create()
+    builder.show()
 }
 

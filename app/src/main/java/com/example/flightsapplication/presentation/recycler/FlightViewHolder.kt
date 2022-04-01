@@ -27,9 +27,9 @@ class FlightViewHolder(itemView: View, private val deleteOnClickListener: Delete
             itemView.historyDeparture.text = departure
             itemView.historyDestination.text = destination
             itemView.historyDateDepart.text = departDate.fromDateToString()
-            itemView.historyDateReturn.text = returnDate.fromDateToString()
+            itemView.historyDateArrival.text = returnDate.fromDateToString()
             itemView.historyNumberPassportPassenger.text = numberPassportPassenger
-            itemView.historyNamePassenger.text = namePassenger + id
+            itemView.historyNamePassenger.text = namePassenger
             itemView.historyTypePassenger.text = typePassenger.type
         }
 

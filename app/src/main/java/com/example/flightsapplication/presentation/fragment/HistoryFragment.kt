@@ -26,9 +26,9 @@ class HistoryFragment : Fragment(R.layout.fragment_flight_history) {
     private val deleteClickListener by lazy {
         object : DeleteOnClickListener {
             override fun deleteTicket(flightTicket: FlightTicket) {
-                dialog("Are you sure? This action cannot be undone!!", requireActivity()){
+                dialog(getString(R.string.title_dialog_message), requireActivity()){
                     viewTicketModel.deleteFlightTicket(flightTicket)
-                    showSnack("111", requireView())
+                    showSnack(requireActivity().getString(R.string.remote_success), requireView())
                 }
             }
         }
