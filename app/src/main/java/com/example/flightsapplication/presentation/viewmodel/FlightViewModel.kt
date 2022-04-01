@@ -1,13 +1,15 @@
 package com.example.flightsapplication.presentation.viewmodel
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.flightsapplication.R
 import com.example.flightsapplication.domain.models.FlightTicket
 import com.example.flightsapplication.domain.repository.FlightTicketInteractor
+import com.example.flightsapplication.utils.showSnack
 import kotlinx.coroutines.launch
-import java.util.*
 
 class FlightViewModel(private val interactor: FlightTicketInteractor) : ViewModel() {
 
@@ -17,22 +19,36 @@ class FlightViewModel(private val interactor: FlightTicketInteractor) : ViewMode
     fun createFlightTicket(
         departure: String,
         destination: String,
-        departDate: Date,
-        returnDate: Date,
+        departDate: String,
+        returnDate: String,
         numberPassportPassenger: String,
         namePassenger: String,
-        typePassenger: FlightTicket.TypePassenger
+        typePassenger: FlightTicket.TypePassenger,
+        view: View
     ) {
         viewModelScope.launch {
-            interactor.createFlightTickets(
-                departure,
-                destination,
-                departDate,
-                returnDate,
-                numberPassportPassenger,
-                namePassenger,
-                typePassenger
-            )
+            if (validation(
+                    departure,
+                    destination,
+                    departDate,
+                    returnDate,
+                    numberPassportPassenger,
+                    namePassenger,
+                )
+            ) {
+                interactor.createFlightTickets(
+                    departure,
+                    destination,
+                    departDate,
+                    returnDate,
+                    numberPassportPassenger,
+                    namePassenger,
+                    typePassenger
+                )
+                showSnack(view.context.getString(R.string.message_flight_success), view)
+            } else {
+                showSnack(view.context.getString(R.string.show_snack_validation), view)
+            }
         }
     }
 
@@ -40,5 +56,21 @@ class FlightViewModel(private val interactor: FlightTicketInteractor) : ViewMode
         viewModelScope.launch {
             _flightTicket.postValue(interactor.getFlightTickets())
         }
+    }
+
+    private fun validation(
+        departure: String,
+        destination: String,
+        departDate: String,
+        returnDate: String,
+        numberPassportPassenger: String,
+        namePassenger: String
+    ): Boolean {
+        return !(departure.isEmpty() ||
+                destination.isEmpty() ||
+                departDate.isEmpty() ||
+                returnDate.isEmpty() ||
+                numberPassportPassenger.isEmpty() ||
+                namePassenger.isEmpty())
     }
 }

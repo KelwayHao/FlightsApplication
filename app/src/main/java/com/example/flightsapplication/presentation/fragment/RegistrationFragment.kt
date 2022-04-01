@@ -5,8 +5,10 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.flightsapplication.R
 import com.example.flightsapplication.domain.models.FlightTicket
+import com.example.flightsapplication.presentation.datapickmanager.DataPickManager
 import com.example.flightsapplication.presentation.viewmodel.FlightViewModel
-import com.example.flightsapplication.utils.*
+import com.example.flightsapplication.utils.checkTypePassenger
+import com.example.flightsapplication.utils.openFragment
 import kotlinx.android.synthetic.main.fragment_flight_registration.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -35,26 +37,15 @@ class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
     private fun initViews() {
 
         inputDepartDate.setOnClickListener {
-            openDataAndTimePicker(inputDepartDate)
+            DataPickManager().openDataTimePicker(inputDepartDate, requireContext())
         }
 
         inputReturnDate.setOnClickListener {
-            openDataAndTimePicker(inputReturnDate)
+            DataPickManager().openDataTimePicker(inputReturnDate, requireContext())
         }
 
         buttonConfirmFlight.setOnClickListener {
-            if (inputFlightDeparture.text.isEmpty() ||
-                inputFlightDestination.text.isEmpty() ||
-                inputDepartDate.text.isEmpty() ||
-                inputReturnDate.text.isEmpty() ||
-                inputNumberPassportPassenger.text.isEmpty() ||
-                inputNamePassenger.text.isEmpty()
-            ) {
-                showSnack(getString(R.string.show_snack_validation), this.requireView())
-            } else {
-                createFlight()
-                showSnack(getString(R.string.message_flight_success), this.requireView())
-            }
+            createFlight()
         }
     }
 
@@ -62,11 +53,12 @@ class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
         viewModel.createFlightTicket(
             inputFlightDeparture.text.toString(),
             inputFlightDestination.text.toString(),
-            inputDepartDate.text.toString().fromStringToDate(),
-            inputReturnDate.text.toString().fromStringToDate(),
+            inputDepartDate.text.toString(),
+            inputReturnDate.text.toString(),
             inputNumberPassportPassenger.text.toString(),
             inputNamePassenger.text.toString(),
-            typePassenger.checkTypePassenger()
+            typePassenger.checkTypePassenger(),
+            requireView()
         )
     }
 

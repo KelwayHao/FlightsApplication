@@ -1,19 +1,11 @@
 package com.example.flightsapplication.utils
 
-import android.annotation.SuppressLint
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.view.View
-import android.widget.TextView
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import com.example.flightsapplication.data.storage.entity.FlightTicketEntity
 import com.example.flightsapplication.domain.models.FlightTicket
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.switchmaterial.SwitchMaterial
-import java.text.SimpleDateFormat
-import java.util.*
 
 fun FragmentActivity.openFragment(idFrameFragment: Int, fragment: Fragment, tag: String) {
     supportFragmentManager
@@ -21,45 +13,6 @@ fun FragmentActivity.openFragment(idFrameFragment: Int, fragment: Fragment, tag:
         .replace(idFrameFragment, fragment, tag)
         .addToBackStack(tag)
         .commit()
-}
-
-fun FlightTicketEntity.toFlightTicket() =
-    FlightTicket(
-        departure = departure,
-        destination = destination,
-        departDate = departDate.fromStringToDate(),
-        returnDate = returnDate.fromStringToDate(),
-        numberPassportPassenger = numberPassportPassenger,
-        namePassenger = namePassenger,
-        typePassenger = typePassenger.toTypePassenger()
-    )
-
-
-fun FlightTicket.toFlightTicketEntity() =
-    FlightTicketEntity(
-        departure = departure,
-        destination = destination,
-        departDate = departDate.fromDateToString(),
-        returnDate = returnDate.fromDateToString(),
-        numberPassportPassenger = numberPassportPassenger,
-        namePassenger = namePassenger,
-        typePassenger = typePassenger.type
-    )
-
-
-@SuppressLint("SimpleDateFormat")
-fun String.fromStringToDate(): Date {
-    return SimpleDateFormat("dd-MM-yy HH:mm", Locale.ENGLISH).parse(this)
-        ?: throw IllegalStateException("Wrong format input")
-}
-
-@SuppressLint("SimpleDateFormat")
-fun Date.fromDateToString(): String {
-    return SimpleDateFormat("dd-MM-yy HH:mm", Locale.ENGLISH).format(this)
-}
-
-fun String.toTypePassenger(): FlightTicket.TypePassenger {
-    return FlightTicket.TypePassenger.valueOf(this.uppercase())
 }
 
 fun showSnack(message: String, view: View) {
@@ -70,45 +23,5 @@ fun SwitchMaterial.checkTypePassenger(): FlightTicket.TypePassenger {
     return if (isChecked) FlightTicket.TypePassenger.CHILD else FlightTicket.TypePassenger.ADULT
 }
 
-val calendar: Calendar = Calendar.getInstance()
-
-@SuppressLint("SetTextI18n")
-fun Fragment.openDataAndTimePicker(textView: TextView) {
-
-    val datePickerDialog = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-        calendar.set(Calendar.MONTH, month)
-        calendar.set(Calendar.YEAR, year)
-        textView.text = "${calendar.get(Calendar.DAY_OF_MONTH)}-${calendar.get(Calendar.MONTH)}-${
-            calendar.get(Calendar.YEAR)
-        }"
-        timePickTime(textView)
-    }
-
-    DatePickerDialog(
-        requireContext(),
-        datePickerDialog,
-        calendar.get(Calendar.YEAR),
-        calendar.get(Calendar.MONTH),
-        calendar.get(Calendar.DAY_OF_MONTH)
-    ).show()
-}
-
-@SuppressLint("SetTextI18n")
-fun Fragment.timePickTime(textView: TextView) {
-    val timePickerDialog = TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
-        calendar.set(Calendar.MINUTE, minute)
-        textView.text = "${textView.text} ${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)}"
-    }
-
-    TimePickerDialog(
-        requireContext(),
-        timePickerDialog,
-        calendar.get(Calendar.HOUR_OF_DAY),
-        calendar.get(Calendar.MINUTE),
-        false
-    ).show()
-}
 
 

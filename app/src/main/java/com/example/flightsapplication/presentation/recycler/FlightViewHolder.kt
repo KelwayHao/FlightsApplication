@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flightsapplication.R
 import com.example.flightsapplication.domain.models.FlightTicket
-import com.example.flightsapplication.utils.fromDateToString
 import kotlinx.android.synthetic.main.item_flight_history.view.*
 
 class FlightViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -20,8 +19,8 @@ class FlightViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         with(flightTicket) {
             itemView.historyDeparture.text = departure
             itemView.historyDestination.text = destination
-            itemView.historyDateDepart.text = departDate.fromDateToString()
-            itemView.historyDateReturn.text = returnDate.fromDateToString()
+            itemView.historyDateDepart.text = departDate
+            itemView.historyDateReturn.text = returnDate
             itemView.historyNumberPassportPassenger.text = numberPassportPassenger
             itemView.historyNamePassenger.text = namePassenger
             itemView.historyTypePassenger.text = typePassenger.type

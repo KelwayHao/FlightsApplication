@@ -22,8 +22,4 @@ class FlightTicketEntityRepositoryImpl(private val flightTicketsDao: FlightTicke
             flightTicketsDao.saveFlightTicket(ticket.toFlightTicketEntity())
         }
     }
-
-    /*override suspend fun deleteFlightTicketOnDatabase() {
-        TODO("Not yet implemented")
-    }*/
 }
