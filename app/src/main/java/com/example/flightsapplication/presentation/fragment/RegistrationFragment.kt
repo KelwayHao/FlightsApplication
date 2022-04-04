@@ -20,6 +20,12 @@ class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
         fun newInstance() = RegistrationFragment()
     }
 
+    private val isValidListener = object: ValidationListener {
+        override fun validationListener(message: Int) {
+            showSnack(getString(message),requireView())
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
@@ -28,33 +34,24 @@ class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
     }
 
     private fun initTextSwitchComponent() {
-        textViewOffSwitch.text = FlightTicket.TypePassenger.ADULT.type
-        textViewOnSwitch.text = FlightTicket.TypePassenger.CHILD.type
+        textViewOffSwitch.text = FlightTicket.PassengerAge.ADULT.type
+        textViewOnSwitch.text = FlightTicket.PassengerAge.CHILD.type
     }
 
     private fun initViews() {
 
+        val dataPicker = DataPickerManager(requireContext())
+
         inputDepartDate.setOnClickListener {
-            openDataAndTimePicker(inputDepartDate)
+            dataPicker.openDataTimePicker(inputDepartDate)
         }
 
         inputReturnDate.setOnClickListener {
-            openDataAndTimePicker(inputReturnDate)
+            dataPicker.openDataTimePicker(inputReturnDate)
         }
 
         buttonConfirmFlight.setOnClickListener {
-            if (inputFlightDeparture.text.isEmpty() ||
-                inputFlightDestination.text.isEmpty() ||
-                inputDepartDate.text.isEmpty() ||
-                inputReturnDate.text.isEmpty() ||
-                inputNumberPassportPassenger.text.isEmpty() ||
-                inputNamePassenger.text.isEmpty()
-            ) {
-                showSnack(getString(R.string.show_snack_validation), this.requireView())
-            } else {
-                createFlight()
-                showSnack(getString(R.string.message_flight_success), this.requireView())
-            }
+            createFlight()
         }
     }
 
@@ -63,11 +60,12 @@ class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
             idF,
             inputFlightDeparture.text.toString(),
             inputFlightDestination.text.toString(),
-            inputDepartDate.text.toString().fromStringToDate(),
-            inputReturnDate.text.toString().fromStringToDate(),
+            inputDepartDate.text.toString(),
+            inputReturnDate.text.toString(),
             inputNumberPassportPassenger.text.toString(),
             inputNamePassenger.text.toString(),
-            typePassenger.checkTypePassenger()
+            passengerAge.checkPassengerAge(),
+            isValidListener
         )
         idF++
     }

@@ -17,11 +17,11 @@ class FlightTicketRepositoryImpl(private val repository: FlightTicketRepository)
         id:Long,
         departure: String,
         destination: String,
-        departDate: Date,
-        returnDate: Date,
+        departDate: String,
+        returnDate: String,
         numberPassportPassenger: String,
         namePassenger: String,
-        typePassenger: FlightTicket.TypePassenger
+        passengerAge: FlightTicket.PassengerAge
     ) {
         repository.saveFlightTicket(
             FlightTicket(
@@ -32,7 +32,7 @@ class FlightTicketRepositoryImpl(private val repository: FlightTicketRepository)
                 returnDate,
                 numberPassportPassenger,
                 namePassenger,
-                typePassenger
+                passengerAge
             )
         )
     }

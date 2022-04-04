@@ -182,13 +182,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                app:layout_constraintEnd_toStartOf="@+id/typePassenger"
+                app:layout_constraintEnd_toStartOf="@+id/passengerAge"
                 app:layout_constraintStart_toEndOf="@id/imagePassenger"
-                app:layout_constraintTop_toTopOf="@id/typePassenger"
-                app:layout_constraintBottom_toBottomOf="@id/typePassenger"/>
+                app:layout_constraintTop_toTopOf="@id/passengerAge"
+                app:layout_constraintBottom_toBottomOf="@id/passengerAge"/>
 
             <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/typePassenger"
+                android:id="@+id/passengerAge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -204,10 +204,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                app:layout_constraintStart_toEndOf="@id/typePassenger"
+                app:layout_constraintStart_toEndOf="@id/passengerAge"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/typePassenger"
-                app:layout_constraintBottom_toBottomOf="@id/typePassenger"/>
+                app:layout_constraintTop_toTopOf="@id/passengerAge"
+                app:layout_constraintBottom_toBottomOf="@id/passengerAge"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

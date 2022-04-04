@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flightsapplication.R
 import com.example.flightsapplication.domain.models.FlightTicket
-import com.example.flightsapplication.presentation.DeleteOnClickListener
-import com.example.flightsapplication.utils.fromDateToString
+import com.example.flightsapplication.presentation.listeners.DeleteOnClickListener
 import kotlinx.android.synthetic.main.item_flight_history.view.*
 
 class FlightViewHolder(itemView: View, private val deleteOnClickListener: DeleteOnClickListener) :
@@ -26,11 +25,11 @@ class FlightViewHolder(itemView: View, private val deleteOnClickListener: Delete
         with(flightTicket) {
             itemView.historyDeparture.text = departure
             itemView.historyDestination.text = destination
-            itemView.historyDateDepart.text = departDate.fromDateToString()
-            itemView.historyDateArrival.text = returnDate.fromDateToString()
+            itemView.historyDateDepart.text = departDate
+            itemView.historyDateReturn.text = returnDate
             itemView.historyNumberPassportPassenger.text = numberPassportPassenger
             itemView.historyNamePassenger.text = namePassenger
-            itemView.historyTypePassenger.text = typePassenger.type
+            itemView.historyTypePassenger.text = passengerAge.type
         }
 
         itemView.imageDeleteObject.setOnClickListener {

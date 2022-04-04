@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flightsapplication.domain.models.FlightTicket
-import com.example.flightsapplication.presentation.DeleteOnClickListener
+import com.example.flightsapplication.presentation.listeners.DeleteOnClickListener
 
 class Adapter(private val deleteOnClickListener: DeleteOnClickListener) : RecyclerView.Adapter<FlightViewHolder>() {
 

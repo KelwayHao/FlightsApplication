@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.flightsapplication.R
 import com.example.flightsapplication.domain.models.FlightTicket
-import com.example.flightsapplication.presentation.DeleteOnClickListener
+import com.example.flightsapplication.presentation.listeners.DeleteOnClickListener
 import com.example.flightsapplication.presentation.recycler.Adapter
 import com.example.flightsapplication.presentation.viewmodel.HistoryFragmentViewModel
 import com.example.flightsapplication.utils.dialog

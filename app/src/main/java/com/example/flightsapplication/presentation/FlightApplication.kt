@@ -4,7 +4,6 @@ import android.app.Application
 import com.example.flightsapplication.data.di.dataModule
 import com.example.flightsapplication.data.di.roomModule
 import com.example.flightsapplication.domain.di.domainModelModule
-import com.example.flightsapplication.domain.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -18,8 +17,8 @@ class FlightApplication : Application() {
                 listOf(
                     roomModule,
                     dataModule,
-                    viewModelModule,
-                    domainModelModule
+                    domainModelModule,
+                    viewMo
                 )
             )
         }

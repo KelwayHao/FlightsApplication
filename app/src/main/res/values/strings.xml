@@ -17,4 +17,5 @@
     <string name="title_dialog_message">Are you sure? This action cannot be undone!!</string>
     <string name="arrival_text">Arrival</string>
     <string name="depart_text">Depart</string>
+    <string name="error_format_input">Wrong format input</string>
 </resources>
