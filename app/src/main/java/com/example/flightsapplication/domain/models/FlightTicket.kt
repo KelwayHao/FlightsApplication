@@ -1,7 +1,5 @@
 package com.example.flightsapplication.domain.models
 
-import java.util.*
-
 data class FlightTicket(
     val departure: String,
     val destination: String,
@@ -9,10 +7,10 @@ data class FlightTicket(
     val returnDate: String,
     val numberPassportPassenger: String,
     val namePassenger: String,
-    val typePassenger: TypePassenger
+    val passengerAge: PassengerAge
 
 ) {
-    enum class TypePassenger(val type: String) {
+    enum class PassengerAge(val type: String) {
         ADULT("Adult"),
         CHILD("Child")
     }

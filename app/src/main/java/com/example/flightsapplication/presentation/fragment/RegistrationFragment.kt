@@ -5,10 +5,12 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.flightsapplication.R
 import com.example.flightsapplication.domain.models.FlightTicket
-import com.example.flightsapplication.presentation.datapickmanager.DataPickManager
+import com.example.flightsapplication.presentation.datapickmanager.DataPickerManager
+import com.example.flightsapplication.presentation.listeners.ValidationListener
 import com.example.flightsapplication.presentation.viewmodel.FlightViewModel
-import com.example.flightsapplication.utils.checkTypePassenger
+import com.example.flightsapplication.utils.checkPassengerAge
 import com.example.flightsapplication.utils.openFragment
+import com.example.flightsapplication.utils.showSnack
 import kotlinx.android.synthetic.main.fragment_flight_registration.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -21,6 +23,11 @@ class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
         fun newInstance() = RegistrationFragment()
     }
 
+    private val isValidListener = object: ValidationListener {
+        override fun validationListener(message: Int) {
+            showSnack(getString(message),requireView())
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,18 +37,20 @@ class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
     }
 
     private fun initTextSwitchComponent() {
-        textViewOffSwitch.text = FlightTicket.TypePassenger.ADULT.type
-        textViewOnSwitch.text = FlightTicket.TypePassenger.CHILD.type
+        textViewOffSwitch.text = FlightTicket.PassengerAge.ADULT.type
+        textViewOnSwitch.text = FlightTicket.PassengerAge.CHILD.type
     }
 
     private fun initViews() {
 
+        val dataPicker = DataPickerManager(requireContext())
+
         inputDepartDate.setOnClickListener {
-            DataPickManager().openDataTimePicker(inputDepartDate, requireContext())
+            dataPicker.openDataTimePicker(inputDepartDate)
         }
 
         inputReturnDate.setOnClickListener {
-            DataPickManager().openDataTimePicker(inputReturnDate, requireContext())
+            dataPicker.openDataTimePicker(inputReturnDate)
         }
 
         buttonConfirmFlight.setOnClickListener {
@@ -57,8 +66,8 @@ class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
             inputReturnDate.text.toString(),
             inputNumberPassportPassenger.text.toString(),
             inputNamePassenger.text.toString(),
-            typePassenger.checkTypePassenger(),
-            requireView()
+            passengerAge.checkPassengerAge(),
+            isValidListener
         )
     }
 

@@ -10,7 +10,7 @@ val roomModule = module {
         Room.databaseBuilder(
             get(),
             AppDatabase::class.java,
-            "flightticketstable"
+            "flighttickets"
         ).build()
     }
 

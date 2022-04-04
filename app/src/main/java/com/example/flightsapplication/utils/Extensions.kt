@@ -19,8 +19,8 @@ fun showSnack(message: String, view: View) {
     Snackbar.make(view, message, Snackbar.LENGTH_LONG).show()
 }
 
-fun SwitchMaterial.checkTypePassenger(): FlightTicket.TypePassenger {
-    return if (isChecked) FlightTicket.TypePassenger.CHILD else FlightTicket.TypePassenger.ADULT
+fun SwitchMaterial.checkPassengerAge(): FlightTicket.PassengerAge {
+    return if (isChecked) FlightTicket.PassengerAge.CHILD else FlightTicket.PassengerAge.ADULT
 }
 
 

@@ -1,7 +1,6 @@
 package com.example.flightsapplication.domain.repository
 
 import com.example.flightsapplication.domain.models.FlightTicket
-import java.util.*
 
 interface FlightTicketInteractor {
     suspend fun getFlightTickets(): List<FlightTicket>
@@ -13,6 +12,6 @@ interface FlightTicketInteractor {
         returnDate: String,
         numberPassportPassenger: String,
         namePassenger: String,
-        typePassenger: FlightTicket.TypePassenger
+        typePassenger: FlightTicket.PassengerAge
     )
 }

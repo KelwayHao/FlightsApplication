@@ -12,4 +12,5 @@
     <string name="depart_date">Depart Date and Time</string>
     <string name="return_date">Return Date and Time</string>
     <string name="message_flight_success">Flight successfully saved</string>
+    <string name="error_format_input">Wrong format input</string>
 </resources>

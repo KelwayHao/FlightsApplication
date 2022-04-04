@@ -12,6 +12,6 @@ interface FlightTicketsDao {
     @Insert
     suspend fun saveFlightTicket(flightTicket: FlightTicketEntity)
 
-    @Query("SELECT * FROM flightticketstable")
+    @Query("SELECT * FROM flighttickets")
     suspend fun getAllFlightTicket(): List<FlightTicketEntity>
 }

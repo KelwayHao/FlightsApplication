@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "flightticketstable")
+@Entity(tableName = "flighttickets")
 data class FlightTicketEntity(
     @ColumnInfo(name = "departure")
     val departure: String,
@@ -19,7 +19,7 @@ data class FlightTicketEntity(
     @ColumnInfo(name = "name_passenger")
     val namePassenger: String,
     @ColumnInfo(name = "type_passenger")
-    val typePassenger: String
+    val passengerAge: String
 ){
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 }

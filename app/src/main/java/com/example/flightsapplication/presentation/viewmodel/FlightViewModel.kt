@@ -1,6 +1,5 @@
 package com.example.flightsapplication.presentation.viewmodel
 
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.flightsapplication.R
 import com.example.flightsapplication.domain.models.FlightTicket
 import com.example.flightsapplication.domain.repository.FlightTicketInteractor
-import com.example.flightsapplication.utils.showSnack
+import com.example.flightsapplication.presentation.listeners.ValidationListener
 import kotlinx.coroutines.launch
 
 class FlightViewModel(private val interactor: FlightTicketInteractor) : ViewModel() {
@@ -23,11 +22,11 @@ class FlightViewModel(private val interactor: FlightTicketInteractor) : ViewMode
         returnDate: String,
         numberPassportPassenger: String,
         namePassenger: String,
-        typePassenger: FlightTicket.TypePassenger,
-        view: View
+        passengerAge: FlightTicket.PassengerAge,
+        validListener: ValidationListener
     ) {
         viewModelScope.launch {
-            if (validation(
+            if (isValid(
                     departure,
                     destination,
                     departDate,
@@ -43,11 +42,11 @@ class FlightViewModel(private val interactor: FlightTicketInteractor) : ViewMode
                     returnDate,
                     numberPassportPassenger,
                     namePassenger,
-                    typePassenger
+                    passengerAge
                 )
-                showSnack(view.context.getString(R.string.message_flight_success), view)
+                validListener.validationListener(R.string.message_flight_success)
             } else {
-                showSnack(view.context.getString(R.string.show_snack_validation), view)
+                validListener.validationListener(R.string.show_snack_validation)
             }
         }
     }
@@ -58,7 +57,7 @@ class FlightViewModel(private val interactor: FlightTicketInteractor) : ViewMode
         }
     }
 
-    private fun validation(
+    private fun isValid(
         departure: String,
         destination: String,
         departDate: String,

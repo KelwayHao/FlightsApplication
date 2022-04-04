@@ -7,8 +7,8 @@ import android.widget.TextView
 import com.example.flightsapplication.utils.fromDateToString
 import java.util.*
 
-class DataPickManager {
-    fun openDataTimePicker(textView: TextView, context: Context) {
+class DataPickerManager(private val context: Context) {
+    fun openDataTimePicker(textView: TextView) {
         val calendar: Calendar = Calendar.getInstance()
         val datePickerDialog = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)

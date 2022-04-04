@@ -23,7 +23,7 @@ class FlightViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             itemView.historyDateReturn.text = returnDate
             itemView.historyNumberPassportPassenger.text = numberPassportPassenger
             itemView.historyNamePassenger.text = namePassenger
-            itemView.historyTypePassenger.text = typePassenger.type
+            itemView.historyTypePassenger.text = passengerAge.type
         }
     }
 }

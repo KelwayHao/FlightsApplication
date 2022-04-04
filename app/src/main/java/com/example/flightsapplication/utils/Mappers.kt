@@ -14,7 +14,7 @@ fun FlightTicketEntity.toFlightTicket() =
         returnDate = returnDate,
         numberPassportPassenger = numberPassportPassenger,
         namePassenger = namePassenger,
-        typePassenger = typePassenger.toTypePassenger()
+        passengerAge = passengerAge.toPassengerAge()
     )
 
 
@@ -26,21 +26,20 @@ fun FlightTicket.toFlightTicketEntity() =
         returnDate = returnDate,
         numberPassportPassenger = numberPassportPassenger,
         namePassenger = namePassenger,
-        typePassenger = typePassenger.type
+        passengerAge = passengerAge.type
     )
-
 
 @SuppressLint("SimpleDateFormat")
 fun String.fromStringToDate(): Date {
-    return SimpleDateFormat("dd-MM-yy HH:mm", Locale.ENGLISH).parse(this)
+    return SimpleDateFormat(Constant.DATE_FORMAT, Locale.ENGLISH).parse(this)
         ?: throw IllegalStateException("Wrong format input")
 }
 
 @SuppressLint("SimpleDateFormat")
 fun Date.fromDateToString(): String {
-    return SimpleDateFormat("dd-MM-yy HH:mm", Locale.ENGLISH).format(this)
+    return SimpleDateFormat(Constant.DATE_FORMAT, Locale.ENGLISH).format(this)
 }
 
-fun String.toTypePassenger(): FlightTicket.TypePassenger {
-    return FlightTicket.TypePassenger.valueOf(this.uppercase())
+fun String.toPassengerAge(): FlightTicket.PassengerAge {
+    return FlightTicket.PassengerAge.valueOf(this.uppercase())
 }
