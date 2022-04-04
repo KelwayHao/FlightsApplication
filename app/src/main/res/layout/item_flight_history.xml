@@ -35,10 +35,10 @@
                 android:textColor="@color/black"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/historyNamePassenger"
-                app:layout_constraintEnd_toStartOf="@id/historyTypePassenger"/>
+                app:layout_constraintEnd_toStartOf="@id/historyPassengerAge"/>
 
             <TextView
-                android:id="@+id/historyTypePassenger"
+                android:id="@+id/historyPassengerAge"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
@@ -86,25 +86,25 @@
                 app:layout_constraintTop_toBottomOf="@id/descriptionDestination" />
 
             <TextView
-                android:id="@+id/descriptionDataDepart"
+                android:id="@+id/descriptionDateDepart"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/depart_text"
                 android:textSize="10sp"
                 android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toStartOf="@id/descriptionDataArrival"
+                app:layout_constraintEnd_toStartOf="@id/descriptionDateArrival"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/historyDeparture" />
 
             <TextView
-                android:id="@+id/descriptionDataArrival"
+                android:id="@+id/descriptionDateArrival"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/arrival_text"
                 android:textSize="10sp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/descriptionDataDepart"
+                app:layout_constraintStart_toEndOf="@id/descriptionDateDepart"
                 app:layout_constraintTop_toBottomOf="@id/historyDestination" />
 
             <TextView
@@ -114,7 +114,7 @@
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toStartOf="@id/historyDateArrival"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/descriptionDataDepart" />
+                app:layout_constraintTop_toBottomOf="@id/descriptionDateDepart" />
 
             <TextView
                 android:id="@+id/historyDateArrival"
@@ -123,7 +123,7 @@
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/historyDeparture"
-                app:layout_constraintTop_toBottomOf="@id/descriptionDataArrival" />
+                app:layout_constraintTop_toBottomOf="@id/descriptionDateArrival" />
 
             <ImageView
                 android:id="@+id/imageDeleteObject"

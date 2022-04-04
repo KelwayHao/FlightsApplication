@@ -26,10 +26,10 @@ class FlightViewHolder(itemView: View, private val deleteOnClickListener: Delete
             itemView.historyDeparture.text = departure
             itemView.historyDestination.text = destination
             itemView.historyDateDepart.text = departDate
-            itemView.historyDateReturn.text = returnDate
+            itemView.historyDateArrival.text = returnDate
             itemView.historyNumberPassportPassenger.text = numberPassportPassenger
             itemView.historyNamePassenger.text = namePassenger
-            itemView.historyTypePassenger.text = passengerAge.type
+            itemView.historyPassengerAge.text = passengerAge.type
         }
 
         itemView.imageDeleteObject.setOnClickListener {

@@ -5,15 +5,19 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.flightsapplication.R
 import com.example.flightsapplication.domain.models.FlightTicket
-import com.example.flightsapplication.presentation.viewmodel.RegistrationFlightFragmentViewModel
-import com.example.flightsapplication.utils.*
+import com.example.flightsapplication.presentation.datapickmanager.DataPickerManager
+import com.example.flightsapplication.presentation.listeners.ValidationListener
+import com.example.flightsapplication.presentation.viewmodel.FlightFragmentViewModel
+import com.example.flightsapplication.utils.checkPassengerAge
+import com.example.flightsapplication.utils.openFragment
+import com.example.flightsapplication.utils.showSnack
 import kotlinx.android.synthetic.main.fragment_flight_registration.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
 
-    private val viewModel: RegistrationFlightFragmentViewModel by viewModel<RegistrationFlightFragmentViewModel>()
-    private var idF: Long = 0
+    private val viewModel: FlightFragmentViewModel by viewModel<FlightFragmentViewModel>()
+
 
     companion object {
         const val TAG = "Registration fragment"
@@ -31,6 +35,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
         initViews()
         checkHistory()
         initTextSwitchComponent()
+        viewModel.getFlightTickets()
     }
 
     private fun initTextSwitchComponent() {
@@ -56,8 +61,10 @@ class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
     }
 
     private fun createFlight() {
+        val idTicket: Long = viewModel.getSize()
+        val d = idTicket
         viewModel.createFlightTicket(
-            idF,
+            idTicket,
             inputFlightDeparture.text.toString(),
             inputFlightDestination.text.toString(),
             inputDepartDate.text.toString(),
@@ -67,7 +74,6 @@ class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
             passengerAge.checkPassengerAge(),
             isValidListener
         )
-        idF++
     }
 
     private fun checkHistory() {

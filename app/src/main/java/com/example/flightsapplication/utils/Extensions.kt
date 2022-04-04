@@ -33,5 +33,18 @@ fun SwitchMaterial.checkPassengerAge(): FlightTicket.PassengerAge {
     return if (isChecked) FlightTicket.PassengerAge.CHILD else FlightTicket.PassengerAge.ADULT
 }
 
-
+fun Fragment.dialog(message: String, context: Context, deleteFlight: () -> Unit) {
+    val builder = AlertDialog.Builder(context)
+    builder.setTitle(R.string.warning)
+        .setMessage(message)
+        .setCancelable(true)
+        .setPositiveButton("Yes") { dialogMessage, _ ->
+            deleteFlight()
+            dialogMessage.cancel()
+        }
+        .setNegativeButton("No") { dialogMessage, _ ->
+            dialogMessage.cancel()
+        }
+    builder.show()
+}
 

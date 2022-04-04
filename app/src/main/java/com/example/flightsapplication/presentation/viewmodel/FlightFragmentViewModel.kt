@@ -9,15 +9,15 @@ import com.example.flightsapplication.domain.models.FlightTicket
 import com.example.flightsapplication.domain.repository.FlightTicketInteractor
 import com.example.flightsapplication.presentation.listeners.ValidationListener
 import kotlinx.coroutines.launch
-import java.util.*
 
-class RegistrationFlightFragmentViewModel(private val interactor: FlightTicketInteractor) :
+class FlightFragmentViewModel(private val interactor: FlightTicketInteractor) :
     ViewModel() {
 
     private val _flightTicket = MutableLiveData<List<FlightTicket>>()
     val flightTicket: LiveData<List<FlightTicket>> get() = _flightTicket
 
     fun createFlightTicket(
+        idTicket: Long,
         departure: String,
         destination: String,
         departDate: String,
@@ -38,6 +38,7 @@ class RegistrationFlightFragmentViewModel(private val interactor: FlightTicketIn
                 )
             ) {
                 interactor.createFlightTickets(
+                    idTicket,
                     departure,
                     destination,
                     departDate,
@@ -57,6 +58,10 @@ class RegistrationFlightFragmentViewModel(private val interactor: FlightTicketIn
         viewModelScope.launch {
             _flightTicket.postValue(interactor.getFlightTickets())
         }
+    }
+
+    fun getSize(): Long{
+        return flightTicket.value?.size?.toLong() ?: 0
     }
 
     private fun isValid(

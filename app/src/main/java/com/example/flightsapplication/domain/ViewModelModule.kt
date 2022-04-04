@@ -1,13 +1,13 @@
 package com.example.flightsapplication.domain
 
 import com.example.flightsapplication.presentation.viewmodel.HistoryFragmentViewModel
-import com.example.flightsapplication.presentation.viewmodel.RegistrationFlightFragmentViewModel
+import com.example.flightsapplication.presentation.viewmodel.FlightFragmentViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
-    viewModel<RegistrationFlightFragmentViewModel> {
-        RegistrationFlightFragmentViewModel(
+    viewModel<FlightFragmentViewModel> {
+        FlightFragmentViewModel(
             get()
         )
     }
