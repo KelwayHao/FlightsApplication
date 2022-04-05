@@ -18,4 +18,8 @@
     <string name="arrival_text">Arrival</string>
     <string name="depart_text">Depart</string>
     <string name="error_format_input">Wrong format input</string>
+    <string name="child">Child</string>
+    <string name="adult">Adult</string>
+    <string name="sure">Sure</string>
+    <string name="cancel">Cancel</string>
 </resources>

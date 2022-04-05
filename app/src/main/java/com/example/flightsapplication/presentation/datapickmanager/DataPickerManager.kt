@@ -14,7 +14,7 @@ class DataPickerManager(private val context: Context) {
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             calendar.set(Calendar.MONTH, month)
             calendar.set(Calendar.YEAR, year)
-            timePickTime(textView, calendar, context)
+            timePickTime(textView, calendar)
         }
 
         DatePickerDialog(
@@ -26,7 +26,7 @@ class DataPickerManager(private val context: Context) {
         ).show()
     }
 
-    private fun timePickTime(textView: TextView, calendar: Calendar, context: Context) {
+    private fun timePickTime(textView: TextView, calendar: Calendar) {
         val timePickerDialog = TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
             calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
             calendar.set(Calendar.MINUTE, minute)

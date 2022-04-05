@@ -9,9 +9,8 @@ data class FlightTicket(
     val numberPassportPassenger: String,
     val namePassenger: String,
     val passengerAge: PassengerAge
-
 ) {
-    enum class PassengerAge(val type: String) {
+    enum class PassengerAge(val age: String) {
         ADULT("Adult"),
         CHILD("Child")
     }

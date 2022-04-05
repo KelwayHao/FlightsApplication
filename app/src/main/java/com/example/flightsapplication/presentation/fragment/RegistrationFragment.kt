@@ -6,28 +6,21 @@ import androidx.fragment.app.Fragment
 import com.example.flightsapplication.R
 import com.example.flightsapplication.domain.models.FlightTicket
 import com.example.flightsapplication.presentation.datapickmanager.DataPickerManager
-import com.example.flightsapplication.presentation.listeners.ValidationListener
 import com.example.flightsapplication.presentation.viewmodel.FlightFragmentViewModel
-import com.example.flightsapplication.utils.checkPassengerAge
 import com.example.flightsapplication.utils.openFragment
 import com.example.flightsapplication.utils.showSnack
+import com.google.android.material.switchmaterial.SwitchMaterial
 import kotlinx.android.synthetic.main.fragment_flight_registration.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
 
-    private val viewModel: FlightFragmentViewModel by viewModel<FlightFragmentViewModel>()
-
+    private val viewModel by viewModel<FlightFragmentViewModel>()
+    private val dataPicker by lazy { DataPickerManager(requireContext()) }
 
     companion object {
         const val TAG = "Registration fragment"
         fun newInstance() = RegistrationFragment()
-    }
-
-    private val isValidListener = object: ValidationListener {
-        override fun validationListener(message: Int) {
-            showSnack(getString(message),requireView())
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,17 +28,14 @@ class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
         initViews()
         checkHistory()
         initTextSwitchComponent()
-        viewModel.getFlightTickets()
     }
 
     private fun initTextSwitchComponent() {
-        textViewOffSwitch.text = FlightTicket.PassengerAge.ADULT.type
-        textViewOnSwitch.text = FlightTicket.PassengerAge.CHILD.type
+        textViewOffSwitch.text = FlightTicket.PassengerAge.ADULT.age
+        textViewOnSwitch.text = FlightTicket.PassengerAge.CHILD.age
     }
 
     private fun initViews() {
-
-        val dataPicker = DataPickerManager(requireContext())
 
         inputDepartDate.setOnClickListener {
             dataPicker.openDataTimePicker(inputDepartDate)
@@ -61,10 +51,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
     }
 
     private fun createFlight() {
-        val idTicket: Long = viewModel.getSize()
-        val d = idTicket
         viewModel.createFlightTicket(
-            idTicket,
             inputFlightDeparture.text.toString(),
             inputFlightDestination.text.toString(),
             inputDepartDate.text.toString(),
@@ -72,8 +59,10 @@ class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
             inputNumberPassportPassenger.text.toString(),
             inputNamePassenger.text.toString(),
             passengerAge.checkPassengerAge(),
-            isValidListener
         )
+        viewModel.snack.observe(viewLifecycleOwner) { event ->
+            showSnack(getString(event), requireView())
+        }
     }
 
     private fun checkHistory() {
@@ -84,5 +73,9 @@ class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
                 HistoryFragment.TAG
             )
         }
+    }
+
+    private fun SwitchMaterial.checkPassengerAge(): FlightTicket.PassengerAge {
+        return if (isChecked) FlightTicket.PassengerAge.CHILD else FlightTicket.PassengerAge.ADULT
     }
 }

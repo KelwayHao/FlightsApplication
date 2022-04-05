@@ -27,12 +27,9 @@ fun FlightTicket.toFlightTicketEntity() =
         returnDate = returnDate,
         numberPassportPassenger = numberPassportPassenger,
         namePassenger = namePassenger,
-        passengerAge = passengerAge.type,
+        passengerAge = passengerAge.age,
         id = id
     )
-
-
-
 
 @SuppressLint("SimpleDateFormat")
 fun String.fromStringToDate(): Date {

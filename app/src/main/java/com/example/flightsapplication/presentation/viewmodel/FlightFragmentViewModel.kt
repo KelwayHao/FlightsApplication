@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.flightsapplication.R
 import com.example.flightsapplication.domain.models.FlightTicket
 import com.example.flightsapplication.domain.repository.FlightTicketInteractor
-import com.example.flightsapplication.presentation.listeners.ValidationListener
 import kotlinx.coroutines.launch
 
 class FlightFragmentViewModel(private val interactor: FlightTicketInteractor) :
@@ -16,8 +15,10 @@ class FlightFragmentViewModel(private val interactor: FlightTicketInteractor) :
     private val _flightTicket = MutableLiveData<List<FlightTicket>>()
     val flightTicket: LiveData<List<FlightTicket>> get() = _flightTicket
 
+    private val _snack = MutableLiveData<Int>()
+    val snack: LiveData<Int> get() = _snack
+
     fun createFlightTicket(
-        idTicket: Long,
         departure: String,
         destination: String,
         departDate: String,
@@ -25,8 +26,8 @@ class FlightFragmentViewModel(private val interactor: FlightTicketInteractor) :
         numberPassportPassenger: String,
         namePassenger: String,
         passengerAge: FlightTicket.PassengerAge,
-        validListener: ValidationListener
     ) {
+        getFlightTickets()
         viewModelScope.launch {
             if (isValid(
                     departure,
@@ -38,7 +39,7 @@ class FlightFragmentViewModel(private val interactor: FlightTicketInteractor) :
                 )
             ) {
                 interactor.createFlightTickets(
-                    idTicket,
+                    getSize(),
                     departure,
                     destination,
                     departDate,
@@ -47,20 +48,20 @@ class FlightFragmentViewModel(private val interactor: FlightTicketInteractor) :
                     namePassenger,
                     passengerAge
                 )
-                validListener.validationListener(R.string.message_flight_success)
+                _snack.value = R.string.message_flight_success
             } else {
-                validListener.validationListener(R.string.show_snack_validation)
+                _snack.value = R.string.show_snack_validation
             }
         }
     }
 
-    fun getFlightTickets() {
+    private fun getFlightTickets() {
         viewModelScope.launch {
             _flightTicket.postValue(interactor.getFlightTickets())
         }
     }
 
-    fun getSize(): Long{
+    private fun getSize(): Long {
         return flightTicket.value?.size?.toLong() ?: 0
     }
 
@@ -72,11 +73,11 @@ class FlightFragmentViewModel(private val interactor: FlightTicketInteractor) :
         numberPassportPassenger: String,
         namePassenger: String
     ): Boolean {
-        return !(departure.isEmpty() ||
-                destination.isEmpty() ||
-                departDate.isEmpty() ||
-                returnDate.isEmpty() ||
-                numberPassportPassenger.isEmpty() ||
-                namePassenger.isEmpty())
+        return (departure.isNotEmpty() &&
+                destination.isNotEmpty() &&
+                departDate.isNotEmpty() &&
+                returnDate.isNotEmpty() &&
+                numberPassportPassenger.isNotEmpty() &&
+                namePassenger.isNotEmpty())
     }
 }

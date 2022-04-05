@@ -15,7 +15,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HistoryFragment : Fragment(R.layout.fragment_flight_history) {
 
-    private val viewTicketModel: HistoryFragmentViewModel by viewModel<HistoryFragmentViewModel>()
+    private val viewTicketModel by viewModel<HistoryFragmentViewModel>()
     private val adapter by lazy { Adapter(deleteClickListener) }
 
     companion object {
@@ -26,9 +26,11 @@ class HistoryFragment : Fragment(R.layout.fragment_flight_history) {
     private val deleteClickListener by lazy {
         object : DeleteOnClickListener {
             override fun deleteTicket(flightTicket: FlightTicket) {
-                dialog(getString(R.string.title_dialog_message), requireActivity()){
+                dialog(getString(R.string.title_dialog_message), requireActivity()) {
                     viewTicketModel.deleteFlightTicket(flightTicket)
-                    showSnack(requireActivity().getString(R.string.remote_success), requireView())
+                }
+                viewTicketModel.snack.observe(viewLifecycleOwner) { event ->
+                    showSnack(requireActivity().getString(event), requireView())
                 }
             }
         }

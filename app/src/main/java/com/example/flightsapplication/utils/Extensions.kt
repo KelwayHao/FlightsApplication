@@ -29,20 +29,16 @@ fun showSnack(message: String, view: View) {
     Snackbar.make(view, message, Snackbar.LENGTH_LONG).show()
 }
 
-fun SwitchMaterial.checkPassengerAge(): FlightTicket.PassengerAge {
-    return if (isChecked) FlightTicket.PassengerAge.CHILD else FlightTicket.PassengerAge.ADULT
-}
-
 fun Fragment.dialog(message: String, context: Context, deleteFlight: () -> Unit) {
     val builder = AlertDialog.Builder(context)
     builder.setTitle(R.string.warning)
         .setMessage(message)
         .setCancelable(true)
-        .setPositiveButton("Yes") { dialogMessage, _ ->
+        .setPositiveButton(getString(R.string.sure)) { dialogMessage, _ ->
             deleteFlight()
             dialogMessage.cancel()
         }
-        .setNegativeButton("No") { dialogMessage, _ ->
+        .setNegativeButton(getString(R.string.cancel)) { dialogMessage, _ ->
             dialogMessage.cancel()
         }
     builder.show()
