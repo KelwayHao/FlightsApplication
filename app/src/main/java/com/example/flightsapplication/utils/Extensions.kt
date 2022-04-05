@@ -14,6 +14,7 @@ import com.example.flightsapplication.data.storage.entity.FlightTicketEntity
 import com.example.flightsapplication.domain.models.FlightTicket
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.switchmaterial.SwitchMaterial
+import org.intellij.lang.annotations.RegExp
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -44,3 +45,6 @@ fun Fragment.dialog(message: String, context: Context, deleteFlight: () -> Unit)
     builder.show()
 }
 
+fun String.checkValidPassport(): Boolean {
+    return Regex(Constant.VALID_PASSPORT_FORMAT).matches(this)
+}

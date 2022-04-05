@@ -7,10 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.flightsapplication.R
 import com.example.flightsapplication.domain.models.FlightTicket
 import com.example.flightsapplication.domain.repository.FlightTicketInteractor
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
+import com.example.flightsapplication.utils.checkValidPassport
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class FlightFragmentViewModel(private val interactor: FlightTicketInteractor) :
     ViewModel() {
@@ -20,9 +18,11 @@ class FlightFragmentViewModel(private val interactor: FlightTicketInteractor) :
 
     private val _snack = MutableLiveData<Int>()
     val snack: LiveData<Int> get() = _snack
+
     init {
         getFlightTickets()
     }
+
     fun createFlightTicket(
         departure: String,
         destination: String,
@@ -80,7 +80,7 @@ class FlightFragmentViewModel(private val interactor: FlightTicketInteractor) :
                 destination.isNotEmpty() &&
                 departDate.isNotEmpty() &&
                 returnDate.isNotEmpty() &&
-                numberPassportPassenger.isNotEmpty() &&
+                numberPassportPassenger.checkValidPassport() &&
                 namePassenger.isNotEmpty())
     }
 }

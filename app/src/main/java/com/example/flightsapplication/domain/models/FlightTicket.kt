@@ -13,9 +13,9 @@ data class FlightTicket(
     init {
         id = departDate.hashCode() + returnDate.hashCode().toLong()
     }
-    enum class PassengerAge(val age: String) {
-        ADULT("Adult"),
-        CHILD("Child")
+    enum class PassengerAge(val idAge: Int) {
+        CHILD(0),
+        ADULT(1)
     }
 }
 

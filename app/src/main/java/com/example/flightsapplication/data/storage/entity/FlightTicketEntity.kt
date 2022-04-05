@@ -21,5 +21,5 @@ data class FlightTicketEntity(
     @ColumnInfo(name = "name_passenger")
     val namePassenger: String,
     @ColumnInfo(name = "passenger_age")
-    val passengerAge: String
+    val passengerAge: Int
 )

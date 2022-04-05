@@ -1,6 +1,9 @@
 package com.example.flightsapplication.utils
 
 import android.annotation.SuppressLint
+import android.content.res.Resources
+import androidx.core.content.res.ResourcesCompat
+import com.example.flightsapplication.R
 import com.example.flightsapplication.data.storage.entity.FlightTicketEntity
 import com.example.flightsapplication.domain.models.FlightTicket
 import java.text.SimpleDateFormat
@@ -27,7 +30,7 @@ fun FlightTicket.toFlightTicketEntity() =
         returnDate = returnDate,
         numberPassportPassenger = numberPassportPassenger,
         namePassenger = namePassenger,
-        passengerAge = passengerAge.age,
+        passengerAge = passengerAge.idAge,
         id = id
     )
 
@@ -42,6 +45,20 @@ fun Date.fromDateToString(): String {
     return SimpleDateFormat(Constant.DATE_FORMAT, Locale.ENGLISH).format(this)
 }
 
-fun String.toPassengerAge(): FlightTicket.PassengerAge {
-    return FlightTicket.PassengerAge.valueOf(this.uppercase())
+fun Int.toPassengerAge(): FlightTicket.PassengerAge {
+    return when(this) {
+        0 -> FlightTicket.PassengerAge.CHILD
+        1 -> FlightTicket.PassengerAge.ADULT
+        else -> throw IllegalStateException(Resources.getSystem().getString(R.string.wrong_parameter_age))
+    }
+}
+
+fun Int.getValuePassengerAge(): Int{
+    return when(this) {
+        0 -> R.string.child
+        1 -> R.string.adult
+        else -> throw IllegalStateException(
+            Resources.getSystem().getString(R.string.wrong_parameter_age)
+        )
+    }
 }

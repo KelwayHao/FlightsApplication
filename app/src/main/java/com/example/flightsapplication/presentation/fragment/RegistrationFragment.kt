@@ -31,8 +31,8 @@ class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
     }
 
     private fun initTextSwitchComponent() {
-        textViewOffSwitch.text = FlightTicket.PassengerAge.ADULT.age
-        textViewOnSwitch.text = FlightTicket.PassengerAge.CHILD.age
+        textViewOffSwitch.text = getString(R.string.adult)
+        textViewOnSwitch.text = getString(R.string.child)
     }
 
     private fun initViews() {
