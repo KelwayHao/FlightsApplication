@@ -14,7 +14,6 @@ class FlightTicketRepositoryImpl(private val repository: FlightTicketRepository)
     }
 
     override suspend fun createFlightTickets(
-        id:Long,
         departure: String,
         destination: String,
         departDate: String,
@@ -25,14 +24,13 @@ class FlightTicketRepositoryImpl(private val repository: FlightTicketRepository)
     ) {
         repository.saveFlightTicket(
             FlightTicket(
-                id,
-                departure,
-                destination,
-                departDate,
-                returnDate,
-                numberPassportPassenger,
-                namePassenger,
-                passengerAge
+                departure = departure,
+                destination = destination,
+                departDate = departDate,
+                returnDate = returnDate,
+                numberPassportPassenger = numberPassportPassenger,
+                namePassenger = namePassenger,
+                passengerAge = passengerAge
             )
         )
     }

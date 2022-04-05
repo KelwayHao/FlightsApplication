@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "flighttickets")
 data class FlightTicketEntity(
     @PrimaryKey
-    val id: Long,
+    var id: Long,
     @ColumnInfo(name = "departure")
     val departure: String,
     @ColumnInfo(name = "destination")

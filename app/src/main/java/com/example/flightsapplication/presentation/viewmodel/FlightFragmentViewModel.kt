@@ -7,7 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.flightsapplication.R
 import com.example.flightsapplication.domain.models.FlightTicket
 import com.example.flightsapplication.domain.repository.FlightTicketInteractor
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FlightFragmentViewModel(private val interactor: FlightTicketInteractor) :
     ViewModel() {
@@ -17,7 +20,9 @@ class FlightFragmentViewModel(private val interactor: FlightTicketInteractor) :
 
     private val _snack = MutableLiveData<Int>()
     val snack: LiveData<Int> get() = _snack
-
+    init {
+        getFlightTickets()
+    }
     fun createFlightTicket(
         departure: String,
         destination: String,
@@ -27,7 +32,6 @@ class FlightFragmentViewModel(private val interactor: FlightTicketInteractor) :
         namePassenger: String,
         passengerAge: FlightTicket.PassengerAge,
     ) {
-        getFlightTickets()
         viewModelScope.launch {
             if (isValid(
                     departure,
@@ -39,14 +43,13 @@ class FlightFragmentViewModel(private val interactor: FlightTicketInteractor) :
                 )
             ) {
                 interactor.createFlightTickets(
-                    getSize(),
-                    departure,
-                    destination,
-                    departDate,
-                    returnDate,
-                    numberPassportPassenger,
-                    namePassenger,
-                    passengerAge
+                    departure = departure,
+                    destination = destination,
+                    departDate = departDate,
+                    returnDate = returnDate,
+                    numberPassportPassenger = numberPassportPassenger,
+                    namePassenger = namePassenger,
+                    passengerAge = passengerAge
                 )
                 _snack.value = R.string.message_flight_success
             } else {

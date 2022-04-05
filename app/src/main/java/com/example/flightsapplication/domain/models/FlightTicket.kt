@@ -1,7 +1,7 @@
 package com.example.flightsapplication.domain.models
 
 data class FlightTicket(
-    val id: Long,
+    var id: Long = 0,
     val departure: String,
     val destination: String,
     val departDate: String,
@@ -10,6 +10,9 @@ data class FlightTicket(
     val namePassenger: String,
     val passengerAge: PassengerAge
 ) {
+    init {
+        id = departDate.hashCode() + returnDate.hashCode().toLong()
+    }
     enum class PassengerAge(val age: String) {
         ADULT("Adult"),
         CHILD("Child")

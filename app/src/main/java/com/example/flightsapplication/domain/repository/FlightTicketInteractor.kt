@@ -8,7 +8,6 @@ interface FlightTicketInteractor {
     suspend fun deleteFlightTickets(flightTicket: FlightTicket)
 
     suspend fun createFlightTickets(
-        id: Long,
         departure: String,
         destination: String,
         departDate: String,
