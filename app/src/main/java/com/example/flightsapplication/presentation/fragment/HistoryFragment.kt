@@ -29,6 +29,8 @@ class HistoryFragment : Fragment(R.layout.fragment_flight_history) {
                 dialog(getString(R.string.title_dialog_message), requireActivity()) {
                     viewTicketModel.deleteFlightTicket(flightTicket)
                 }
+            }
+            init {
                 viewTicketModel.snack.observe(viewLifecycleOwner) { event ->
                     showSnack(requireActivity().getString(event), requireView())
                 }
