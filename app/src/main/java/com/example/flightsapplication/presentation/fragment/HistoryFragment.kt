@@ -3,10 +3,11 @@ package com.example.flightsapplication.presentation.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.example.flightsapplication.R
-import com.example.flightsapplication.domain.models.FlightTicket
-import com.example.flightsapplication.presentation.listeners.DeleteOnClickListener
 import com.example.flightsapplication.presentation.recycler.Adapter
+import com.example.flightsapplication.presentation.swipetodeletecallback.SwipeToDeleteCallback
 import com.example.flightsapplication.presentation.viewmodel.HistoryFragmentViewModel
 import com.example.flightsapplication.utils.dialog
 import com.example.flightsapplication.utils.showSnack
@@ -16,24 +17,31 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HistoryFragment : Fragment(R.layout.fragment_flight_history) {
 
     private val viewTicketModel by viewModel<HistoryFragmentViewModel>()
-    private val adapter by lazy { Adapter(deleteClickListener) }
+    private val adapter by lazy { Adapter() }
 
     companion object {
         const val TAG = "History fragment"
         fun newInstance() = HistoryFragment()
     }
 
-    private val deleteClickListener by lazy {
-        object : DeleteOnClickListener {
-            override fun deleteTicket(flightTicket: FlightTicket) {
-                dialog(getString(R.string.title_dialog_message), requireActivity()) {
-                    viewTicketModel.deleteFlightTicket(flightTicket)
+    private val swipeToDeleteCallback = object : SwipeToDeleteCallback() {
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            val position = viewHolder.adapterPosition
+
+            dialog(getString(R.string.title_dialog_message), requireActivity(),
+                {
+                    viewTicketModel.removeItem(position)?.let { flightTicket ->
+                        viewTicketModel.deleteFlightTicket(flightTicket)
+                    }
+                    recyclerFlights.adapter?.notifyItemRemoved(position)
+                },
+                {
+                    viewTicketModel.getFlightTickets()
                 }
-            }
-            init {
-                viewTicketModel.snack.observe(viewLifecycleOwner) { event ->
-                    showSnack(requireActivity().getString(event), requireView())
-                }
+            )
+
+            viewTicketModel.snack.observe(viewLifecycleOwner) { event ->
+                showSnack(requireActivity().getString(event), requireView())
             }
         }
     }
@@ -50,5 +58,8 @@ class HistoryFragment : Fragment(R.layout.fragment_flight_history) {
         viewTicketModel.flightTicket.observe(viewLifecycleOwner) { listTicket ->
             adapter.submitItem(listTicket)
         }
+
+        ItemTouchHelper(swipeToDeleteCallback).attachToRecyclerView(recyclerFlights)
     }
+
 }

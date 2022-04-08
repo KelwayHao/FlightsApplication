@@ -31,4 +31,8 @@ class HistoryFragmentViewModel(private val interactor: FlightTicketInteractor) :
             _snack.value = R.string.remote_success
         }
     }
+
+    fun removeItem(position: Int) : FlightTicket? {
+        return _flightTicket.value?.toMutableList()?.removeAt(position)
+    }
 }

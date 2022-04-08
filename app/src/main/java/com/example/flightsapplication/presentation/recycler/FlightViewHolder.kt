@@ -11,13 +11,13 @@ import com.example.flightsapplication.presentation.listeners.DeleteOnClickListen
 import com.example.flightsapplication.utils.getValuePassengerAge
 import kotlinx.android.synthetic.main.item_flight_history.view.*
 
-class FlightViewHolder(itemView: View, private val deleteOnClickListener: DeleteOnClickListener) :
+class FlightViewHolder(itemView: View) :
     RecyclerView.ViewHolder(itemView) {
     companion object {
-        fun newInstance(parent: ViewGroup, deleteOnClickListener: DeleteOnClickListener) =
+        fun newInstance(parent: ViewGroup) =
             FlightViewHolder(
                 LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_flight_history, parent, false), deleteOnClickListener
+                    .inflate(R.layout.item_flight_history, parent, false)
             )
     }
 
@@ -31,10 +31,6 @@ class FlightViewHolder(itemView: View, private val deleteOnClickListener: Delete
             itemView.historyNumberPassportPassenger.text = numberPassportPassenger
             itemView.historyNamePassenger.text = namePassenger
             itemView.historyPassengerAge.text = itemView.context.getString(passengerAge.idAge.getValuePassengerAge())
-        }
-
-        itemView.imageDeleteObject.setOnClickListener {
-            deleteOnClickListener.deleteTicket(flightTicket)
         }
     }
 }

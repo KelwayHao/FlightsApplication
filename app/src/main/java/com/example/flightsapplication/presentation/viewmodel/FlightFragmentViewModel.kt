@@ -64,10 +64,6 @@ class FlightFragmentViewModel(private val interactor: FlightTicketInteractor) :
         }
     }
 
-    private fun getSize(): Long {
-        return flightTicket.value?.size?.toLong() ?: 0
-    }
-
     private fun isValid(
         departure: String,
         destination: String,

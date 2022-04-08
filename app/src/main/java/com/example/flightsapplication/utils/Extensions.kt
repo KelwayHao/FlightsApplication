@@ -30,7 +30,7 @@ fun showSnack(message: String, view: View) {
     Snackbar.make(view, message, Snackbar.LENGTH_LONG).show()
 }
 
-fun Fragment.dialog(message: String, context: Context, deleteFlight: () -> Unit) {
+fun Fragment.dialog(message: String, context: Context, deleteFlight: () -> Unit, updateFlight: () -> Unit) {
     val builder = AlertDialog.Builder(context)
     builder.setTitle(R.string.warning)
         .setMessage(message)
@@ -40,6 +40,7 @@ fun Fragment.dialog(message: String, context: Context, deleteFlight: () -> Unit)
             dialogMessage.cancel()
         }
         .setNegativeButton(getString(R.string.cancel)) { dialogMessage, _ ->
+            updateFlight()
             dialogMessage.cancel()
         }
     builder.show()
