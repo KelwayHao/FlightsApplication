@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">FlightsApplication</string>
+    <string name="confirm_button">Confirm</string>
+    <string name="button_history_flights">History flights</string>
+    <string name="show_snack_validation">Enter all fields</string>
+    <string name="title_history_page">Your history flight</string>
+    <string name="passenger_switch">Passenger: %s</string>
+    <string name="departure">Departure</string>
+    <string name="destination">Destination</string>
+    <string name="number_passport">Number passport</string>
+    <string name="name_passenger">Name passenger</string>
+    <string name="depart_date">Depart Date and Time</string>
+    <string name="return_date">Return Date and Time</string>
+    <string name="message_flight_success">Flight successfully saved</string>
+    <string name="warning">Warning!</string>
+    <string name="remote_success">Remote Successfully</string>
+    <string name="title_dialog_message">Are you sure? This action cannot be undone!!</string>
+    <string name="arrival_text">Arrival</string>
+    <string name="depart_text">Depart</string>
+    <string name="error_format_input">Wrong format input</string>
+    <string name="child">Child</string>
+    <string name="adult">Adult</string>
+    <string name="sure">Sure</string>
+    <string name="cancel">Cancel</string>
+    <string name="wrong_parameter_age">Wrong parametr age</string>
+</resources>
