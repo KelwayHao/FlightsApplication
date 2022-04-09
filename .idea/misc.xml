@@ -3,7 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/TechMeSkills/FlightsApplication/app/src/main/res/layout/activity_main.xml" value="0.42916666666666664" />
+        <entry key="..\:/TechMeSkills/FlightsApplication/app/src/main/res/drawable/bg_button_corner.xml" value="0.1" />
+        <entry key="..\:/TechMeSkills/FlightsApplication/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/TechMeSkills/FlightsApplication/app/src/main/res/layout/fragment_flight_check_in.xml" value="0.36666666666666664" />
+        <entry key="..\:/TechMeSkills/FlightsApplication/app/src/main/res/layout/fragment_flight_history.xml" value="0.2" />
+        <entry key="..\:/TechMeSkills/FlightsApplication/app/src/main/res/layout/fragment_flight_registration.xml" value="0.2" />
+        <entry key="..\:/TechMeSkills/FlightsApplication/app/src/main/res/layout/item_flight_history.xml" value="0.19" />
       </map>
     </option>
   </component>
