@@ -28,16 +28,16 @@ class HistoryFragment : Fragment(R.layout.fragment_flight_history) {
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
             val position = viewHolder.adapterPosition
 
-            dialog(getString(R.string.title_dialog_message), requireActivity(),
-                {
+            dialog(
+                message = getString(R.string.title_dialog_message),
+                context = requireActivity(),
+                onPositiveButtonClick = {
                     viewTicketModel.removeItem(position)?.let { flightTicket ->
                         viewTicketModel.deleteFlightTicket(flightTicket)
                     }
                     recyclerFlights.adapter?.notifyItemRemoved(position)
                 },
-                {
-                    viewTicketModel.getFlightTickets()
-                }
+                onNegativeButtonClick = { viewTicketModel.getFlightTickets() }
             )
 
             viewTicketModel.snack.observe(viewLifecycleOwner) { event ->
