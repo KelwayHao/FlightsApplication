@@ -39,10 +39,6 @@ class HistoryFragment : Fragment(R.layout.fragment_flight_history) {
                 },
                 onNegativeButtonClick = { viewTicketModel.getFlightTickets() }
             )
-
-            viewTicketModel.snack.observe(viewLifecycleOwner) { event ->
-                showSnack(requireActivity().getString(event), requireView())
-            }
         }
     }
 
@@ -60,6 +56,10 @@ class HistoryFragment : Fragment(R.layout.fragment_flight_history) {
         }
 
         ItemTouchHelper(swipeToDeleteCallback).attachToRecyclerView(recyclerFlights)
+
+        viewTicketModel.snack.observe(viewLifecycleOwner) { event ->
+            showSnack(requireActivity().getString(event), requireView())
+        }
     }
 
 }
