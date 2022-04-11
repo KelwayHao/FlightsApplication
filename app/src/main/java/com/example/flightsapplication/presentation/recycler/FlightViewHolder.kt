@@ -21,7 +21,6 @@ class FlightViewHolder(private val binding: ItemFlightHistoryBinding) :
         )
     }
 
-    @SuppressLint("SetTextI18n")
     fun bindItem(flightTicket: FlightTicket) {
         with(flightTicket) {
             binding.historyDeparture.text = departure
