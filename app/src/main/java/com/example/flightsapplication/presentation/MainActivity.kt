@@ -3,13 +3,18 @@ package com.example.flightsapplication.presentation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flightsapplication.R
+import com.example.flightsapplication.databinding.ActivityMainBinding
 import com.example.flightsapplication.presentation.fragment.RegistrationFragment
 import com.example.flightsapplication.utils.openFragment
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 
     override fun onStart() {

@@ -5,14 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.flightsapplication.R
+import com.example.flightsapplication.databinding.ItemFlightHistoryBinding
 import com.example.flightsapplication.domain.models.FlightTicket
-import com.example.flightsapplication.presentation.listeners.DeleteOnClickListener
 import com.example.flightsapplication.utils.getValuePassengerAge
-import kotlinx.android.synthetic.main.item_flight_history.view.*
 
 class FlightViewHolder(itemView: View) :
     RecyclerView.ViewHolder(itemView) {
+
+    private val binding by viewBinding<ItemFlightHistoryBinding>()
+
     companion object {
         fun newInstance(parent: ViewGroup) =
             FlightViewHolder(
@@ -23,14 +26,19 @@ class FlightViewHolder(itemView: View) :
 
     @SuppressLint("SetTextI18n")
     fun bindItem(flightTicket: FlightTicket) {
-        with(flightTicket) {
-            itemView.historyDeparture.text = departure
-            itemView.historyDestination.text = destination
-            itemView.historyDateDepart.text = departDate
-            itemView.historyDateArrival.text = returnDate
-            itemView.historyNumberPassportPassenger.text = numberPassportPassenger
-            itemView.historyNamePassenger.text = namePassenger
-            itemView.historyPassengerAge.text = itemView.context.getString(passengerAge.idAge.getValuePassengerAge())
+        with(binding) {
+            with(itemView) {
+                with(flightTicket) {
+                    historyDeparture.text = departure
+                    historyDestination.text = destination
+                    historyDateDepart.text = departDate
+                    historyDateArrival.text = returnDate
+                    historyNumberPassportPassenger.text = numberPassportPassenger
+                    historyNamePassenger.text = namePassenger
+                    historyPassengerAge.text =
+                        context.getString(passengerAge.idAge.getValuePassengerAge())
+                }
+            }
         }
     }
 }

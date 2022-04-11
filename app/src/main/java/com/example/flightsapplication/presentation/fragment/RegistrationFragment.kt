@@ -3,18 +3,19 @@ package com.example.flightsapplication.presentation.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.flightsapplication.R
+import com.example.flightsapplication.databinding.FragmentFlightRegistrationBinding
 import com.example.flightsapplication.domain.models.FlightTicket
 import com.example.flightsapplication.presentation.datapickmanager.DataPickerManager
 import com.example.flightsapplication.presentation.viewmodel.FlightFragmentViewModel
 import com.example.flightsapplication.utils.openFragment
 import com.example.flightsapplication.utils.showSnack
 import com.google.android.material.switchmaterial.SwitchMaterial
-import kotlinx.android.synthetic.main.fragment_flight_registration.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
-
+    private val binding by viewBinding<FragmentFlightRegistrationBinding>()
     private val viewModel by viewModel<FlightFragmentViewModel>()
     private val dataPicker by lazy { DataPickerManager(requireContext()) }
 
@@ -31,42 +32,47 @@ class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
     }
 
     private fun initTextSwitchComponent() {
-        textViewOffSwitch.text = getString(R.string.adult)
-        textViewOnSwitch.text = getString(R.string.child)
+        with(binding) {
+            textViewOffSwitch.text = getString(R.string.adult)
+            textViewOnSwitch.text = getString(R.string.child)
+        }
     }
 
     private fun initViews() {
+        with(binding) {
+            inputDepartDate.setOnClickListener {
+                dataPicker.openDataTimePicker(inputDepartDate)
+            }
 
-        inputDepartDate.setOnClickListener {
-            dataPicker.openDataTimePicker(inputDepartDate)
-        }
+            inputReturnDate.setOnClickListener {
+                dataPicker.openDataTimePicker(inputReturnDate)
+            }
 
-        inputReturnDate.setOnClickListener {
-            dataPicker.openDataTimePicker(inputReturnDate)
-        }
-
-        buttonConfirmFlight.setOnClickListener {
-            createFlight()
+            buttonConfirmFlight.setOnClickListener {
+                createFlight()
+            }
         }
     }
 
     private fun createFlight() {
-        viewModel.createFlightTicket(
-            inputFlightDeparture.text.toString(),
-            inputFlightDestination.text.toString(),
-            inputDepartDate.text.toString(),
-            inputReturnDate.text.toString(),
-            inputNumberPassportPassenger.text.toString(),
-            inputNamePassenger.text.toString(),
-            passengerAge.checkPassengerAge(),
-        )
+        with(binding){
+            viewModel.createFlightTicket(
+                inputFlightDeparture.text.toString(),
+                inputFlightDestination.text.toString(),
+                inputDepartDate.text.toString(),
+                inputReturnDate.text.toString(),
+                inputNumberPassportPassenger.text.toString(),
+                inputNamePassenger.text.toString(),
+                passengerAge.checkPassengerAge(),
+            )
+        }
         viewModel.snack.observe(viewLifecycleOwner) { event ->
             showSnack(getString(event), requireView())
         }
     }
 
     private fun checkHistory() {
-        buttonHistoryFlight.setOnClickListener {
+        binding.buttonHistoryFlight.setOnClickListener {
             requireActivity().openFragment(
                 R.id.frameFragment,
                 HistoryFragment.newInstance(),
