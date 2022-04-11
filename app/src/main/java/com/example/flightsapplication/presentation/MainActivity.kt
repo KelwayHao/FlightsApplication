@@ -8,9 +8,9 @@ import com.example.flightsapplication.databinding.ActivityMainBinding
 import com.example.flightsapplication.presentation.fragment.RegistrationFragment
 import com.example.flightsapplication.utils.openFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-    private val binding: ActivityMainBinding by viewBinding()
+    private val binding by viewBinding<ActivityMainBinding>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
