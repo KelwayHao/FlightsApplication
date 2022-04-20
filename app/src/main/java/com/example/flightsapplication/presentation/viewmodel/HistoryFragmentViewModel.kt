@@ -8,8 +8,9 @@ import com.example.flightsapplication.R
 import com.example.flightsapplication.domain.models.FlightTicket
 import com.example.flightsapplication.domain.repository.FlightTicketInteractor
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HistoryFragmentViewModel(private val interactor: FlightTicketInteractor) : ViewModel() {
+class HistoryFragmentViewModel @Inject constructor(private val interactor: FlightTicketInteractor) : ViewModel() {
 
     private val _flightTicket = MutableLiveData<List<FlightTicket>>()
     val flightTicket: LiveData<List<FlightTicket>> get() = _flightTicket

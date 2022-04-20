@@ -9,8 +9,9 @@ import com.example.flightsapplication.domain.models.FlightTicket
 import com.example.flightsapplication.domain.repository.FlightTicketInteractor
 import com.example.flightsapplication.utils.checkValidPassport
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class FlightFragmentViewModel(private val interactor: FlightTicketInteractor) :
+class FlightFragmentViewModel @Inject constructor(private val interactor: FlightTicketInteractor) :
     ViewModel() {
 
     private val _flightTicket = MutableLiveData<List<FlightTicket>>()

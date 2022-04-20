@@ -8,16 +8,19 @@ import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.flightsapplication.R
 import com.example.flightsapplication.databinding.FragmentFlightHistoryBinding
+import com.example.flightsapplication.presentation.FlightApplication
 import com.example.flightsapplication.presentation.recycler.Adapter
 import com.example.flightsapplication.presentation.swipetodeletecallback.SwipeToDeleteCallback
 import com.example.flightsapplication.presentation.viewmodel.HistoryFragmentViewModel
 import com.example.flightsapplication.utils.dialog
 import com.example.flightsapplication.utils.showSnack
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import javax.inject.Inject
 
 class HistoryFragment : Fragment(R.layout.fragment_flight_history) {
+    @Inject
+    lateinit var viewTicketModel: HistoryFragmentViewModel
     private val binding by viewBinding<FragmentFlightHistoryBinding>()
-    private val viewTicketModel by viewModel<HistoryFragmentViewModel>()
+    //private val viewTicketModel by viewModel<HistoryFragmentViewModel>()
     private val adapter by lazy { Adapter() }
 
     companion object {
@@ -45,6 +48,7 @@ class HistoryFragment : Fragment(R.layout.fragment_flight_history) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        FlightApplication.appComponent?.inject(this)
         viewTicketModel.getFlightTickets()
         initObserver()
     }
