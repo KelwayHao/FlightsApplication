@@ -20,7 +20,6 @@ class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
     @Inject
     lateinit var viewModel: FlightFragmentViewModel
     private val binding by viewBinding<FragmentFlightRegistrationBinding>()
-    //private val viewModel by viewModels<FlightFragmentViewModel>()
     private val dataPicker by lazy { DataPickerManager(requireContext()) }
 
     companion object {
@@ -72,7 +71,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
             )
         }
         viewModel.snack.observe(viewLifecycleOwner) { event ->
-            showSnack(getString(event), requireView())
+            showSnack(event, requireView())
         }
     }
 

@@ -20,7 +20,6 @@ class HistoryFragment : Fragment(R.layout.fragment_flight_history) {
     @Inject
     lateinit var viewTicketModel: HistoryFragmentViewModel
     private val binding by viewBinding<FragmentFlightHistoryBinding>()
-    //private val viewTicketModel by viewModel<HistoryFragmentViewModel>()
     private val adapter by lazy { Adapter() }
 
     companion object {
@@ -63,7 +62,7 @@ class HistoryFragment : Fragment(R.layout.fragment_flight_history) {
         ItemTouchHelper(swipeToDeleteCallback).attachToRecyclerView(binding.recyclerFlights)
 
         viewTicketModel.snack.observe(viewLifecycleOwner) { event ->
-            showSnack(requireActivity().getString(event), requireView())
+            showSnack(event, requireView())
         }
     }
 

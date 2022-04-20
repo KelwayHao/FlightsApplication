@@ -8,17 +8,19 @@ import com.example.flightsapplication.R
 import com.example.flightsapplication.domain.models.FlightTicket
 import com.example.flightsapplication.domain.repository.FlightTicketInteractor
 import com.example.flightsapplication.utils.checkValidPassport
+import com.example.flightsapplication.utils.resourceprovider.ResourceProvider
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class FlightFragmentViewModel @Inject constructor(private val interactor: FlightTicketInteractor) :
+class FlightFragmentViewModel @Inject constructor(private val interactor: FlightTicketInteractor,
+private val resourceProvider: ResourceProvider) :
     ViewModel() {
 
     private val _flightTicket = MutableLiveData<List<FlightTicket>>()
     val flightTicket: LiveData<List<FlightTicket>> get() = _flightTicket
 
-    private val _snack = MutableLiveData<Int>()
-    val snack: LiveData<Int> get() = _snack
+    private val _snack = MutableLiveData<String>()
+    val snack: LiveData<String> get() = _snack
 
     init {
         getFlightTickets()
@@ -52,9 +54,9 @@ class FlightFragmentViewModel @Inject constructor(private val interactor: Flight
                     namePassenger = namePassenger,
                     passengerAge = passengerAge
                 )
-                _snack.value = R.string.message_flight_success
+                _snack.value = resourceProvider.getString(R.string.message_flight_success)
             } else {
-                _snack.value = R.string.show_snack_validation
+                _snack.value = resourceProvider.getString(R.string.show_snack_validation)
             }
         }
     }

@@ -16,8 +16,3 @@ class DataModule {
         return FlightTicketEntityRepositoryImpl(flightTicketsDao)
     }
 }
-/*val dataModule = module {
-    single<FlightTicketRepository> {
-        FlightTicketEntityRepositoryImpl(get())
-    }
-}*/

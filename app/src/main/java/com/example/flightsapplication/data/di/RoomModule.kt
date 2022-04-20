@@ -24,16 +24,3 @@ class RoomModule {
         return database.getFlightTickets()
     }
 }
-/*val roomModule = module {
-    single<AppDatabase> {
-        Room.databaseBuilder(
-            get(),
-            AppDatabase::class.java,
-            "flighttickets"
-        ).build()
-    }
-
-    single<FlightTicketsDao> {
-        get<AppDatabase>().getFlightTickets()
-    }
-}*/

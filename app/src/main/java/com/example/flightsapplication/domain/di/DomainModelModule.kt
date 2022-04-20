@@ -16,10 +16,3 @@ class DomainModelModule {
         return FlightTicketRepositoryImpl(repository)
     }
 }
-/*val domainModelModule = module {
-
-    single<FlightTicketInteractor> {
-        FlightTicketRepositoryImpl(get())
-    }
-
-}*/
