@@ -7,16 +7,19 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.flightsapplication.R
 import com.example.flightsapplication.databinding.FragmentFlightRegistrationBinding
 import com.example.flightsapplication.domain.models.FlightTicket
+import com.example.flightsapplication.presentation.FlightApplication
 import com.example.flightsapplication.presentation.datapickmanager.DataPickerManager
 import com.example.flightsapplication.presentation.viewmodel.FlightFragmentViewModel
 import com.example.flightsapplication.utils.openFragment
 import com.example.flightsapplication.utils.showSnack
 import com.google.android.material.switchmaterial.SwitchMaterial
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import javax.inject.Inject
 
 class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
+
+    @Inject
+    lateinit var viewModel: FlightFragmentViewModel
     private val binding by viewBinding<FragmentFlightRegistrationBinding>()
-    private val viewModel by viewModel<FlightFragmentViewModel>()
     private val dataPicker by lazy { DataPickerManager(requireContext()) }
 
     companion object {
@@ -26,6 +29,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        FlightApplication.appComponent?.inject(this)
         initViews()
         checkHistory()
         initTextSwitchComponent()
@@ -67,7 +71,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_flight_registration) {
             )
         }
         viewModel.snack.observe(viewLifecycleOwner) { event ->
-            showSnack(getString(event), requireView())
+            showSnack(event, requireView())
         }
     }
 

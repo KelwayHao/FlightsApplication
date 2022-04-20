@@ -7,15 +7,21 @@ import androidx.lifecycle.viewModelScope
 import com.example.flightsapplication.R
 import com.example.flightsapplication.domain.models.FlightTicket
 import com.example.flightsapplication.domain.repository.FlightTicketInteractor
+import com.example.flightsapplication.utils.resourceprovider.ResourceProvider
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HistoryFragmentViewModel(private val interactor: FlightTicketInteractor) : ViewModel() {
+class HistoryFragmentViewModel @Inject constructor(
+    private val interactor: FlightTicketInteractor,
+    private val resourceProvider: ResourceProvider
+) :
+    ViewModel() {
 
     private val _flightTicket = MutableLiveData<List<FlightTicket>>()
     val flightTicket: LiveData<List<FlightTicket>> get() = _flightTicket
 
-    private val _snack = MutableLiveData<Int>()
-    val snack: LiveData<Int> get() = _snack
+    private val _snack = MutableLiveData<String>()
+    val snack: LiveData<String> get() = _snack
 
     fun getFlightTickets() {
         viewModelScope.launch {
@@ -28,11 +34,11 @@ class HistoryFragmentViewModel(private val interactor: FlightTicketInteractor) :
             interactor.deleteFlightTickets(flightTicket)
         }.invokeOnCompletion {
             getFlightTickets()
-            _snack.value = R.string.remote_success
+            _snack.value = resourceProvider.getString(R.string.remote_success)
         }
     }
 
-    fun removeItem(position: Int) : FlightTicket? {
+    fun removeItem(position: Int): FlightTicket? {
         return _flightTicket.value?.toMutableList()?.removeAt(position)
     }
 }
